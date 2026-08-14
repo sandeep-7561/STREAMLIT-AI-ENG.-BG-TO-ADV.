@@ -4,7 +4,7 @@ from streamlit_option_menu import option_menu
 st.set_page_config(page_title='AI Engineer',page_icon='items\logo.png',layout='wide')
 
 with st.sidebar:
-    select = option_menu('MENU',['Home','Introduction'])
+    select = option_menu('MENU',['Home','Introduction','Common terminology'])
 
 
 
@@ -118,4 +118,240 @@ if select == 'Introduction':
 
         ML Engineering focuses more deeply on building and operating machine learning models, while AI Engineering focuses more broadly on turning AI capabilities into complete, production-ready intelligent applications.
         ''')
-    
+
+if select == 'Common terminology':
+    st.title('Common terminology')
+    st.divider()
+    st.write('''
+        # Artificial Intelligence (AI) vs Artificial General Intelligence (AGI)
+
+        ## 1. What is Artificial Intelligence (AI)?
+
+        **Artificial Intelligence (AI)** is the field of computer science focused on creating systems that can perform tasks that normally require human intelligence.
+
+        AI systems can be designed to **recognize patterns, understand language, analyze data, make predictions, generate content, solve problems, and make decisions**.
+
+        Examples of AI applications include:
+
+        * Image and face recognition
+        * Speech recognition
+        * Recommendation systems
+        * Fraud detection
+        * Machine translation
+        * Chatbots
+        * Autonomous systems
+        * Generative AI
+        * AI-powered coding assistants
+
+        ### Narrow AI (ANI)
+
+        Most AI systems used today can be considered **Artificial Narrow Intelligence (ANI)**. They are designed for specific tasks or a limited range of capabilities.
+
+        For example, a recommendation system may be highly effective at predicting what content a user might like, but that does not mean it can automatically perform unrelated tasks such as teaching mathematics, designing a database, or diagnosing a computer problem.
+
+        > **AI focuses on creating intelligent systems that can perform specific or defined tasks effectively.**
+
+        ---
+
+        # 2. What is Artificial General Intelligence (AGI)?
+
+        **Artificial General Intelligence (AGI)** refers to a hypothetical form of AI with **general-purpose intelligence** that can learn, reason, adapt, and solve a broad range of intellectual problems across different domains.
+
+        Instead of being designed primarily for one specific task, an AGI system would be expected to transfer knowledge and skills between different types of problems and adapt to new situations.
+
+        For example, a sufficiently capable AGI could potentially:
+
+        * Learn a programming language
+        * Solve mathematical problems
+        * Understand natural language
+        * Analyze scientific information
+        * Plan complex tasks
+        * Learn from new experiences
+        * Use external tools
+        * Adapt to unfamiliar situations
+        * Apply knowledge across different domains
+
+        The key concept behind AGI is **generality**.
+
+        > **AGI aims to create a system with broad, adaptable intelligence rather than intelligence limited to a particular task or domain.**
+
+        ---
+
+        # 3. AI vs AGI
+
+        | AI                                                                          | AGI                                                                                  |
+        | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+        | Artificial Intelligence                                                     | Artificial General Intelligence                                                      |
+        | Can be designed for specific tasks or domains                               | Designed as a concept for broad, general-purpose intelligence                        |
+        | Often specialized                                                           | Intended to be highly general and adaptable                                          |
+        | Usually operates within defined capabilities                                | Expected to handle unfamiliar tasks and domains                                      |
+        | Examples include recommendation systems, vision models, and fraud detection | AGI remains a research goal/concept                                                  |
+        | Does not necessarily require human-level general intelligence               | Aims for broad intelligence comparable to or beyond human general-purpose capability |
+
+        ### Simple Example
+
+        Imagine an AI system trained specifically for **chess**.
+
+        It can analyze positions, predict moves, and play chess extremely well.
+
+        But if you ask it:
+
+        > "Build me a website."
+
+        Its chess expertise does not automatically transfer to web development.
+
+        Now imagine a hypothetical AGI system.
+
+        You could give it a goal such as:
+
+        > "Build a complete website."
+
+        It could potentially understand the objective, learn what it needs, plan the work, write the code, test it, fix problems, and adapt when something unexpected happens.
+
+        That ability to **transfer knowledge, learn new skills, and adapt across different domains** is central to the idea of AGI.
+
+        ---
+
+        # 4. Key Capabilities Associated with AGI
+
+        AGI is generally discussed in terms of several broad capabilities:
+
+        ### **Learning**
+
+        The ability to acquire new knowledge and skills from data, experience, or instruction.
+
+        ### **Reasoning**
+
+        The ability to analyze information, understand relationships, and reach logical conclusions.
+
+        ### **Planning**
+
+        The ability to break a complex goal into multiple steps and determine an effective course of action.
+
+        ### **Adaptation**
+
+        The ability to adjust behavior when the environment, task, or available information changes.
+
+        ### **Generalization**
+
+        The ability to apply knowledge or skills learned in one situation to new and different situations.
+
+        ### **Memory**
+
+        The ability to retain and use relevant information when solving future problems.
+
+        ### **Tool Use**
+
+        The ability to interact with external tools such as software, APIs, databases, browsers, or other systems.
+
+        ### **Autonomy**
+
+        The ability to work toward a goal with limited step-by-step human instruction.
+
+        ---
+
+        # 5. AGI Does Not Mean a Robot
+
+        AGI and robotics are different concepts.
+
+        **AGI refers to intelligence**, while a **robot is a physical machine**.
+
+        An AGI system could theoretically exist as software running on computers or cloud infrastructure without having a physical body.
+
+        A robot could potentially use an AGI-like system as its intelligence.
+
+        ```text
+        AGI / General Intelligence
+                ↓
+            Intelligence
+                ↓
+        ┌────────┼────────┐
+        ↓        ↓        ↓
+        Computer  Robot    Cloud
+        ```
+
+        Therefore:
+
+        > **AGI ≠ Robot**
+
+        ---
+
+        # 6. AGI vs Superintelligence
+
+        AGI should also be distinguished from **Artificial Superintelligence (ASI)**.
+
+        ### AGI
+
+        A hypothetical AI system with broad, general-purpose intelligence capable of handling a wide range of intellectual tasks.
+
+        ### ASI
+
+        A hypothetical AI system whose general intellectual capabilities **far exceed those of humans** across essentially all relevant cognitive domains.
+
+        A simplified conceptual model is:
+
+        ```text
+        Narrow AI
+            ↓
+        Artificial General Intelligence (AGI)
+            ↓
+        Artificial Superintelligence (ASI)
+        ```
+
+        However, this should **not** be interpreted as a guaranteed development path.
+
+        ---
+
+        # 7. Is AGI Already Here?
+
+        There is **no universally accepted definition or definitive test for AGI**, so claims about whether a particular current AI system qualifies as AGI depend heavily on the criteria being used.
+
+        Modern AI systems can demonstrate impressive capabilities across many domains, but **highly capable AI is not automatically equivalent to AGI**.
+
+        The central question is whether a system can reliably demonstrate the broad **learning, reasoning, generalization, and adaptation** expected from general intelligence across a sufficiently wide range of tasks and unfamiliar situations.
+
+        ---
+
+        # 8. The Fundamental Difference
+
+        The simplest way to remember the distinction is:
+
+        ### **AI**
+
+        > **Build intelligent systems that can perform useful tasks.**
+
+        ### **AGI**
+
+        > **Build a general-purpose intelligent system that can learn, reason, adapt, and solve a broad range of new problems across different domains.**
+
+        ---
+
+        ## Final Mental Model
+
+        ```text
+                        ARTIFICIAL INTELLIGENCE
+                                │
+                    ┌────────────┴────────────┐
+                    ↓                         ↓
+                NARROW AI                    AGI
+            Specific / Limited          General Purpose
+                Intelligence                Intelligence
+                    │                         │
+            Specific Tasks            Multiple Domains
+                    │                         │
+            Defined Capability       Learn + Reason + Adapt
+                                            │
+                                            ↓
+                                        AGI Concept
+                                            │
+                                            ↓
+                                            ASI*
+        ```
+
+        * **ASI (Artificial Superintelligence)** is a hypothetical concept involving intelligence that substantially exceeds human capabilities.
+
+        ### **In one sentence:**
+
+        > **AI is the broader field of building intelligent machines, while AGI represents the goal of creating a general-purpose intelligence that can learn, reason, adapt, and apply its capabilities across a wide range of tasks and domains.**
+
+        ''')
