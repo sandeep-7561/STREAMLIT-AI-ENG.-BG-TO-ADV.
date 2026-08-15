@@ -1689,5 +1689,577 @@ if select == 'LLM\'s':
 
     if st.session_state.training == True:
         st.write('''
+        # Model Training in Artificial Intelligence
+
+        ## 1. What is Training?
+
+        **Training** is the process of teaching a machine learning or deep learning model to learn patterns and relationships from data.
+
+        During training, the model makes predictions, compares them with the expected results, calculates its error, and updates its internal parameters to improve its performance.
+
+        > **Training is the process of adjusting a model's parameters so that it can learn useful patterns from data and perform better on future inputs.**
+
+        ---
+
+        # 2. Why is Training Needed?
+
+        A neural network initially does not know how to solve a specific problem.
+
+        For example, if we want a model to recognize cats and dogs, we provide many examples:
+
+        ```text
+        Image → Cat
+        Image → Dog
+        Image → Cat
+        Image → Dog
+        ```
+
+        Through training, the model learns patterns that help it distinguish between the two classes.
+
+        The model is not manually programmed with every rule. Instead, it **learns useful patterns from the training data**.
+
+        ---
+
+        # 3. Basic Training Process
+
+        A simplified training pipeline looks like this:
+
+        ```text
+        Training Data
+            ↓
+        Model
+            ↓
+        Prediction
+            ↓
+        Compare with Expected Result
+            ↓
+        Loss
+            ↓
+        Backpropagation
+            ↓
+        Weight Update
+            ↓
+        Repeat
+        ```
+
+        This cycle is repeated many times until the model learns useful patterns.
+
+        ---
+
+        # 4. Step 1 — Training Data
+
+        Training begins with a dataset.
+
+        Depending on the problem, the data may contain:
+
+        * Text
+        * Images
+        * Audio
+        * Videos
+        * Tables
+        * Sensor data
+        * User interactions
+
+        For example:
+
+        ```text
+        Input                Target
+        --------------------------------
+        Image of Cat     →   Cat
+        Image of Dog     →   Dog
+        Image of Cat     →   Cat
+        ```
+
+        The quality and quantity of training data strongly influence the model's performance.
+
+        ---
+
+        # 5. Step 2 — Model Makes a Prediction
+
+        The data is passed through the model.
+
+        For example:
+
+        ```text
+        Image
+        ↓
+        Neural Network
+        ↓
+        Prediction
+        ```
+
+        Suppose the actual label is:
+
+        ```text
+        Cat
+        ```
+
+        but the model predicts:
+
+        ```text
+        Dog
+        ```
+
+        The model has made an error.
+
+        ---
+
+        # 6. Step 3 — Loss Function
+
+        The model needs a way to measure how wrong its prediction was.
+
+        This is done using a **loss function**.
+
+        The loss represents the difference between the model's prediction and the expected target.
+
+        Conceptually:
+
+        ```text
+        Prediction
+            ↓
+        Compare
+            ↓
+        Expected Result
+            ↓
+        Loss
+        ```
+
+        ### Lower Loss
+
+        Means the model's prediction is closer to the expected result.
+
+        ### Higher Loss
+
+        Means the prediction is further from the expected result.
+
+        Different tasks use different loss functions, such as:
+
+        * Cross-Entropy Loss
+        * Mean Squared Error (MSE)
+        * Mean Absolute Error (MAE)
+
+        ---
+
+        # 7. Step 4 — Backpropagation
+
+        Once the loss is calculated, the model needs to determine how its parameters should be changed.
+
+        This is where **backpropagation** is used.
+
+        Backpropagation calculates how changes in the model's parameters contributed to the error.
+
+        Simplified:
+
+        ```text
+        Loss
+        ↓
+        Calculate Gradients
+        ↓
+        Determine Parameter Changes
+        ```
+
+        These gradients tell the optimization algorithm which direction the parameters should move to reduce the loss.
+
+        ---
+
+        # 8. Step 5 — Weight Update
+
+        Neural networks contain many learnable **parameters**, commonly called weights and biases.
+
+        An optimizer updates these parameters using the calculated gradients.
+
+        A simplified update rule is:
+
+        [
+        w_{new}=w_{old}-\eta \frac{\partial L}{\partial w}
+        ]
+
+        Where:
+
+        * (w) = model parameter
+        * (L) = loss
+        * (\eta) = learning rate
+        * (\frac{\partial L}{\partial w}) = gradient
+
+        The goal is to move the parameters toward values that reduce the loss.
+
+        ---
+
+        # 9. Learning Rate
+
+        The **learning rate** controls how large each parameter update is.
+
+        ### Small learning rate
+
+        ```text
+        Small updates
+        → More gradual learning
+        → Training may take longer
+        ```
+
+        ### Large learning rate
+
+        ```text
+        Large updates
+        → Faster movement
+        → Can become unstable or overshoot
+        ```
+
+        Choosing an appropriate learning rate is important for successful training.
+
+        ---
+
+        # 10. Epoch
+
+        An **epoch** is one complete pass through the entire training dataset.
+
+        Suppose you have:
+
+        ```text
+        10,000 training examples
+        ```
+
+        Processing all 10,000 examples once = **1 epoch**.
+
+        If the model processes the complete dataset 10 times:
+
+        ```text
+        10 epochs
+        ```
+
+        More epochs do not always mean better performance.
+
+        Too many epochs can cause **overfitting**.
+
+        ---
+
+        # 11. Batch Size
+
+        Instead of processing the entire dataset at once, training data is usually divided into smaller groups called **batches**.
+
+        For example:
+
+        ```text
+        Dataset = 10,000 samples
+
+        Batch Size = 100
+
+        10,000 ÷ 100 = 100 batches per epoch
+        ```
+
+        The model processes one batch, updates its parameters, then processes the next batch.
+
+        ---
+
+        # 12. Iteration / Training Step
+
+        One **training step** or iteration generally refers to processing one batch and updating the model parameters.
+
+        For example:
+
+        ```text
+        Batch 1 → Forward Pass → Loss → Backpropagation → Update
+        Batch 2 → Forward Pass → Loss → Backpropagation → Update
+        Batch 3 → Forward Pass → Loss → Backpropagation → Update
+        ```
+
+        After all batches are processed, one epoch is completed.
+
+        ---
+
+        # 13. Forward Pass
+
+        The **forward pass** is the process of sending input data through the neural network to produce an output.
+
+        ```text
+        Input
+        ↓
+        Layer 1
+        ↓
+        Layer 2
+        ↓
+        Layer 3
+        ↓
+        Prediction
+        ```
+
+        The prediction is then used to calculate the loss.
+
+        ---
+
+        # 14. Backward Pass
+
+        The **backward pass** uses the loss to calculate gradients throughout the network.
+
+        ```text
+        Prediction
+        ↓
+        Loss
+        ↓
+        Backward Propagation
+        ↓
+        Gradients
+        ↓
+        Parameter Updates
+        ```
+
+        This allows the model to learn from its errors.
+
+        ---
+
+        # 15. Optimizer
+
+        An **optimizer** determines how the model's parameters should be updated using the gradients.
+
+        Common optimizers include:
+
+        * Gradient Descent
+        * SGD (Stochastic Gradient Descent)
+        * Adam
+        * AdamW
+
+        For example, **Adam** is widely used in deep learning and Transformer-based models.
+
+        ---
+
+        # 16. Training and Validation Data
+
+        A dataset is commonly divided into different parts.
+
+        ```text
+        Dataset
+        ├── Training Set
+        ├── Validation Set
+        └── Test Set
+        ```
+
+        ### Training Set
+
+        Used to learn the model parameters.
+
+        ### Validation Set
+
+        Used during development to evaluate the model and tune choices such as hyperparameters.
+
+        ### Test Set
+
+        Used for final evaluation on data that was not used to fit the model.
+
+        ---
+
+        # 17. Overfitting
+
+        **Overfitting** occurs when a model learns the training data too closely and performs poorly on new, unseen data.
+
+        For example:
+
+        ```text
+        Training Performance → Very High
+        Test Performance     → Poor
+        ```
+
+        The model has learned the training examples and their specific patterns too closely instead of learning patterns that generalize well.
+
+        ---
+
+        # 18. Underfitting
+
+        **Underfitting** occurs when a model is too simple or insufficiently trained to capture the important patterns in the data.
+
+        For example:
+
+        ```text
+        Training Performance → Poor
+        Test Performance     → Poor
+        ```
+
+        The model has not learned enough.
+
+        ---
+
+        # 19. Generalization
+
+        The real goal of training is not simply to memorize the training data.
+
+        The goal is to learn patterns that **generalize to new, unseen data**.
+
+        ```text
+        Training Data
+            ↓
+        Learning Patterns
+            ↓
+        New / Unseen Data
+            ↓
+        Useful Predictions
+        ```
+
+        A good model should perform well beyond the exact examples it saw during training.
+
+        ---
+
+        # 20. Training in Embedding Models
+
+        Embedding models are also trained.
+
+        Their goal is to learn useful vector representations.
+
+        For example, semantically similar texts may be encouraged to have similar embeddings:
+
+        ```text
+        "I love Python programming."
+                ↕
+        "I enjoy coding in Python."
+        ```
+
+        While unrelated text should have less similar representations:
+
+        ```text
+        "I love Python programming."
+                ↕
+        "The football match was exciting."
+        ```
+
+        Training adjusts the model's parameters so that its generated representations become useful for tasks such as **semantic search, retrieval, similarity detection, and RAG**.
+
+        ---
+
+        # 21. Training in LLMs
+
+        Large Language Models are also trained using large-scale datasets.
+
+        A simplified training example:
+
+        ```text
+        Input:
+        "The capital of France is"
+
+        Target:
+        "Paris"
+        ```
+
+        The model predicts a probability distribution over possible next tokens.
+
+        The training system calculates the loss between the prediction and the target, then updates the model parameters.
+
+        This process is repeated on very large numbers of examples.
+
+        ---
+
+        # 22. Training vs Inference
+
+        This distinction is extremely important.
+
+        ### Training
+
+        The model **learns**.
+
+        ```text
+        Data
+        ↓
+        Prediction
+        ↓
+        Loss
+        ↓
+        Backpropagation
+        ↓
+        Parameter Update
+        ```
+
+        ### Inference
+
+        The trained model is **used**.
+
+        ```text
+        New Input
+        ↓
+        Trained Model
+        ↓
+        Prediction / Output
+        ```
+
+        During ordinary inference, the model's learned parameters are not updated.
+
+        ---
+
+        # 23. Hyperparameters
+
+        **Hyperparameters** are settings chosen by the developer or training system rather than learned directly from individual training examples.
+
+        Examples include:
+
+        * Learning rate
+        * Batch size
+        * Number of epochs
+        * Model architecture choices
+        * Optimizer
+        * Weight decay
+        * Dropout rate
+
+        These settings can strongly influence training behavior and final performance.
+
+        ---
+
+        # 24. Complete Training Flow
+
+        The complete simplified process is:
+
+        ```text
+                        TRAINING DATA
+                            ↓
+                        Preprocessing
+                            ↓
+                        Mini-Batch
+                            ↓
+                        Forward Pass
+                            ↓
+                        Prediction
+                            ↓
+                        Loss Calculation
+                            ↓
+                        Backpropagation
+                            ↓
+                        Gradients
+                            ↓
+                            Optimizer
+                            ↓
+                    Parameter Update
+                            ↓
+                        Next Batch
+                            ↓
+                        Next Epoch
+                            ↓
+                    Repeat Training
+                            ↓
+                    Trained Model
+        ```
+
+        ---
+
+        # 25. Key Terms to Remember
+
+        | Term                | Meaning                                                         |
+        | ------------------- | --------------------------------------------------------------- |
+        | **Training**        | Process of learning patterns from data                          |
+        | **Dataset**         | Collection of training examples                                 |
+        | **Parameter**       | Learnable value inside the model                                |
+        | **Weight**          | A learnable parameter controlling information flow              |
+        | **Bias**            | A learnable offset parameter                                    |
+        | **Prediction**      | Model's output for an input                                     |
+        | **Loss**            | Measure of prediction error                                     |
+        | **Gradient**        | Direction and rate of change of loss with respect to parameters |
+        | **Backpropagation** | Method used to calculate gradients                              |
+        | **Optimizer**       | Algorithm used to update parameters                             |
+        | **Learning Rate**   | Controls the size of parameter updates                          |
+        | **Epoch**           | One complete pass through the dataset                           |
+        | **Batch**           | Subset of training examples processed together                  |
+        | **Iteration**       | One parameter-update step, typically for one batch              |
+        | **Overfitting**     | Model learns training data too specifically                     |
+        | **Underfitting**    | Model fails to learn sufficient patterns                        |
+        | **Generalization**  | Performing well on unseen data                                  |
+        | **Inference**       | Using the trained model to make predictions                     |
+
+        ## Final Definition
+
+        > **Model training is the iterative process of presenting data to a model, measuring its prediction error, computing gradients through backpropagation, and updating its parameters with an optimizer so that it learns patterns that generalize to new data.**
 
         ''')
