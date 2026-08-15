@@ -3,8 +3,45 @@ from streamlit_option_menu import option_menu
 
 st.set_page_config(page_title='AI Engineer',page_icon='items\logo.png',layout='wide')
 
+if 'ai_agi' not in st.session_state:
+    st.session_state.ai_agi = False
+
+if 'llms' not in st.session_state:
+    st.session_state.llms = False
+
+if 'embeddings' not in st.session_state:
+    st.session_state.embeddings = False
+
+if 'training' not in st.session_state:
+    st.session_state.training = False
+
+if 'Inference' not in st.session_state:
+    st.session_state.Inference = False
+
+if 'Vector_Databases' not in st.session_state:
+    st.session_state.Vector_Databases = False
+
+if 'AI_Agents' not in st.session_state:
+    st.session_state.AI_Agents = False
+
+if 'RAG' not in st.session_state:
+    st.session_state.RAG = False
+
+if 'Context_Window' not in st.session_state:
+    st.session_state.Context_Window = False
+
+if 'Fine_tuning' not in st.session_state:
+    st.session_state.Fine_tuning = False
+
+if 'Prompt_Engineering' not in st.session_state:
+    st.session_state.Prompt_Engineering = False
+
+if 'Context_Engineering' not in st.session_state:
+    st.session_state.Context_Engineering = False
+
+
 with st.sidebar:
-    select = option_menu('MENU',['Home','Introduction','Common terminology'])
+    select = option_menu('MENU',['Home','Introduction','LLM\'s'])
 
 
 
@@ -119,239 +156,421 @@ if select == 'Introduction':
         ML Engineering focuses more deeply on building and operating machine learning models, while AI Engineering focuses more broadly on turning AI capabilities into complete, production-ready intelligent applications.
         ''')
 
-if select == 'Common terminology':
+if select == 'LLM\'s':
     st.title('Common terminology')
     st.divider()
-    st.write('''
-        # Artificial Intelligence (AI) vs Artificial General Intelligence (AGI)
+    col1,col2,col3,col4 = st.columns(4)
+    with col1:
+        if st.button('AI VS AGI'):
+            st.session_state.ai_agi = True
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
+    with col2:
+        if st.button('LLM\'s'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = True
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
 
-        ## 1. What is Artificial Intelligence (AI)?
+    with col3:
+        if st.button('Embeddings'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = True
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
+    with col4:
+        if st.button('Training'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = True
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
+    col6,col7,col8,col9 = st.columns(4)
+    with col6:
+        if st.button('Inference'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = True
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
 
-        **Artificial Intelligence (AI)** is the field of computer science focused on creating systems that can perform tasks that normally require human intelligence.
+    with col7:
+        if st.button('Vector Database'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = True
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
 
-        AI systems can be designed to **recognize patterns, understand language, analyze data, make predictions, generate content, solve problems, and make decisions**.
+    with col8:
+        if st.button('AI Agents'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = True
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
 
-        Examples of AI applications include:
+    with col9:
+        if st.button('RAG'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = True
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
 
-        * Image and face recognition
-        * Speech recognition
-        * Recommendation systems
-        * Fraud detection
-        * Machine translation
-        * Chatbots
-        * Autonomous systems
-        * Generative AI
-        * AI-powered coding assistants
+    col10,col11,col12,col13 = st.columns(4)
+    with col10:
+        if st.button('Context Window'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = True
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = False
+        
+    with col11:
+        if st.button('Fine Turning'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = True
+            st.session_state.Context_Engineering = False
+    with col12:
+        if st.button('Prompt Engineering'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = True
+            st.session_state.Context_Engineering = False
+    with col13:
+        if st.button('Context Engineering'):
+            st.session_state.ai_agi = False
+            st.session_state.llms = False
+            st.session_state.embeddings = False
+            st.session_state.training = False
+            st.session_state.Inference = False
+            st.session_state.Vector_Databases = False
+            st.session_state.AI_Agents = False
+            st.session_state.RAG = False
+            st.session_state.Context_Window = False
+            st.session_state.Fine_tuning = False
+            st.session_state.Prompt_Engineering = False
+            st.session_state.Context_Engineering = True
+    st.divider()
+    if st.session_state.ai_agi == True:
+        st.write('''
+            # Artificial Intelligence (AI) vs Artificial General Intelligence (AGI)
 
-        ### Narrow AI (ANI)
+            ## 1. What is Artificial Intelligence (AI)?
 
-        Most AI systems used today can be considered **Artificial Narrow Intelligence (ANI)**. They are designed for specific tasks or a limited range of capabilities.
+            **Artificial Intelligence (AI)** is the field of computer science focused on creating systems that can perform tasks that normally require human intelligence.
 
-        For example, a recommendation system may be highly effective at predicting what content a user might like, but that does not mean it can automatically perform unrelated tasks such as teaching mathematics, designing a database, or diagnosing a computer problem.
+            AI systems can be designed to **recognize patterns, understand language, analyze data, make predictions, generate content, solve problems, and make decisions**.
 
-        > **AI focuses on creating intelligent systems that can perform specific or defined tasks effectively.**
+            Examples of AI applications include:
 
-        ---
+            * Image and face recognition
+            * Speech recognition
+            * Recommendation systems
+            * Fraud detection
+            * Machine translation
+            * Chatbots
+            * Autonomous systems
+            * Generative AI
+            * AI-powered coding assistants
 
-        # 2. What is Artificial General Intelligence (AGI)?
+            ### Narrow AI (ANI)
 
-        **Artificial General Intelligence (AGI)** refers to a hypothetical form of AI with **general-purpose intelligence** that can learn, reason, adapt, and solve a broad range of intellectual problems across different domains.
+            Most AI systems used today can be considered **Artificial Narrow Intelligence (ANI)**. They are designed for specific tasks or a limited range of capabilities.
 
-        Instead of being designed primarily for one specific task, an AGI system would be expected to transfer knowledge and skills between different types of problems and adapt to new situations.
+            For example, a recommendation system may be highly effective at predicting what content a user might like, but that does not mean it can automatically perform unrelated tasks such as teaching mathematics, designing a database, or diagnosing a computer problem.
 
-        For example, a sufficiently capable AGI could potentially:
+            > **AI focuses on creating intelligent systems that can perform specific or defined tasks effectively.**
 
-        * Learn a programming language
-        * Solve mathematical problems
-        * Understand natural language
-        * Analyze scientific information
-        * Plan complex tasks
-        * Learn from new experiences
-        * Use external tools
-        * Adapt to unfamiliar situations
-        * Apply knowledge across different domains
+            ---
 
-        The key concept behind AGI is **generality**.
+            # 2. What is Artificial General Intelligence (AGI)?
 
-        > **AGI aims to create a system with broad, adaptable intelligence rather than intelligence limited to a particular task or domain.**
+            **Artificial General Intelligence (AGI)** refers to a hypothetical form of AI with **general-purpose intelligence** that can learn, reason, adapt, and solve a broad range of intellectual problems across different domains.
 
-        ---
+            Instead of being designed primarily for one specific task, an AGI system would be expected to transfer knowledge and skills between different types of problems and adapt to new situations.
 
-        # 3. AI vs AGI
+            For example, a sufficiently capable AGI could potentially:
 
-        | AI                                                                          | AGI                                                                                  |
-        | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-        | Artificial Intelligence                                                     | Artificial General Intelligence                                                      |
-        | Can be designed for specific tasks or domains                               | Designed as a concept for broad, general-purpose intelligence                        |
-        | Often specialized                                                           | Intended to be highly general and adaptable                                          |
-        | Usually operates within defined capabilities                                | Expected to handle unfamiliar tasks and domains                                      |
-        | Examples include recommendation systems, vision models, and fraud detection | AGI remains a research goal/concept                                                  |
-        | Does not necessarily require human-level general intelligence               | Aims for broad intelligence comparable to or beyond human general-purpose capability |
+            * Learn a programming language
+            * Solve mathematical problems
+            * Understand natural language
+            * Analyze scientific information
+            * Plan complex tasks
+            * Learn from new experiences
+            * Use external tools
+            * Adapt to unfamiliar situations
+            * Apply knowledge across different domains
 
-        ### Simple Example
+            The key concept behind AGI is **generality**.
 
-        Imagine an AI system trained specifically for **chess**.
+            > **AGI aims to create a system with broad, adaptable intelligence rather than intelligence limited to a particular task or domain.**
 
-        It can analyze positions, predict moves, and play chess extremely well.
+            ---
 
-        But if you ask it:
+            # 3. AI vs AGI
 
-        > "Build me a website."
+            | AI                                                                          | AGI                                                                                  |
+            | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+            | Artificial Intelligence                                                     | Artificial General Intelligence                                                      |
+            | Can be designed for specific tasks or domains                               | Designed as a concept for broad, general-purpose intelligence                        |
+            | Often specialized                                                           | Intended to be highly general and adaptable                                          |
+            | Usually operates within defined capabilities                                | Expected to handle unfamiliar tasks and domains                                      |
+            | Examples include recommendation systems, vision models, and fraud detection | AGI remains a research goal/concept                                                  |
+            | Does not necessarily require human-level general intelligence               | Aims for broad intelligence comparable to or beyond human general-purpose capability |
 
-        Its chess expertise does not automatically transfer to web development.
+            ### Simple Example
 
-        Now imagine a hypothetical AGI system.
+            Imagine an AI system trained specifically for **chess**.
 
-        You could give it a goal such as:
+            It can analyze positions, predict moves, and play chess extremely well.
 
-        > "Build a complete website."
+            But if you ask it:
 
-        It could potentially understand the objective, learn what it needs, plan the work, write the code, test it, fix problems, and adapt when something unexpected happens.
+            > "Build me a website."
 
-        That ability to **transfer knowledge, learn new skills, and adapt across different domains** is central to the idea of AGI.
+            Its chess expertise does not automatically transfer to web development.
 
-        ---
+            Now imagine a hypothetical AGI system.
 
-        # 4. Key Capabilities Associated with AGI
+            You could give it a goal such as:
 
-        AGI is generally discussed in terms of several broad capabilities:
+            > "Build a complete website."
 
-        ### **Learning**
+            It could potentially understand the objective, learn what it needs, plan the work, write the code, test it, fix problems, and adapt when something unexpected happens.
 
-        The ability to acquire new knowledge and skills from data, experience, or instruction.
+            That ability to **transfer knowledge, learn new skills, and adapt across different domains** is central to the idea of AGI.
 
-        ### **Reasoning**
+            ---
 
-        The ability to analyze information, understand relationships, and reach logical conclusions.
+            # 4. Key Capabilities Associated with AGI
 
-        ### **Planning**
+            AGI is generally discussed in terms of several broad capabilities:
 
-        The ability to break a complex goal into multiple steps and determine an effective course of action.
+            ### **Learning**
 
-        ### **Adaptation**
+            The ability to acquire new knowledge and skills from data, experience, or instruction.
 
-        The ability to adjust behavior when the environment, task, or available information changes.
+            ### **Reasoning**
 
-        ### **Generalization**
+            The ability to analyze information, understand relationships, and reach logical conclusions.
 
-        The ability to apply knowledge or skills learned in one situation to new and different situations.
+            ### **Planning**
 
-        ### **Memory**
+            The ability to break a complex goal into multiple steps and determine an effective course of action.
 
-        The ability to retain and use relevant information when solving future problems.
+            ### **Adaptation**
 
-        ### **Tool Use**
+            The ability to adjust behavior when the environment, task, or available information changes.
 
-        The ability to interact with external tools such as software, APIs, databases, browsers, or other systems.
+            ### **Generalization**
 
-        ### **Autonomy**
+            The ability to apply knowledge or skills learned in one situation to new and different situations.
 
-        The ability to work toward a goal with limited step-by-step human instruction.
+            ### **Memory**
 
-        ---
+            The ability to retain and use relevant information when solving future problems.
 
-        # 5. AGI Does Not Mean a Robot
+            ### **Tool Use**
 
-        AGI and robotics are different concepts.
+            The ability to interact with external tools such as software, APIs, databases, browsers, or other systems.
 
-        **AGI refers to intelligence**, while a **robot is a physical machine**.
+            ### **Autonomy**
 
-        An AGI system could theoretically exist as software running on computers or cloud infrastructure without having a physical body.
+            The ability to work toward a goal with limited step-by-step human instruction.
 
-        A robot could potentially use an AGI-like system as its intelligence.
+            ---
 
-        ```text
-        AGI / General Intelligence
+            # 5. AGI Does Not Mean a Robot
+
+            AGI and robotics are different concepts.
+
+            **AGI refers to intelligence**, while a **robot is a physical machine**.
+
+            An AGI system could theoretically exist as software running on computers or cloud infrastructure without having a physical body.
+
+            A robot could potentially use an AGI-like system as its intelligence.
+
+            ```text
+            AGI / General Intelligence
+                    ↓
+                Intelligence
+                    ↓
+            ┌────────┼────────┐
+            ↓        ↓        ↓
+            Computer  Robot    Cloud
+            ```
+
+            Therefore:
+
+            > **AGI ≠ Robot**
+
+            ---
+
+            # 6. AGI vs Superintelligence
+
+            AGI should also be distinguished from **Artificial Superintelligence (ASI)**.
+
+            ### AGI
+
+            A hypothetical AI system with broad, general-purpose intelligence capable of handling a wide range of intellectual tasks.
+
+            ### ASI
+
+            A hypothetical AI system whose general intellectual capabilities **far exceed those of humans** across essentially all relevant cognitive domains.
+
+            A simplified conceptual model is:
+
+            ```text
+            Narrow AI
                 ↓
-            Intelligence
+            Artificial General Intelligence (AGI)
                 ↓
-        ┌────────┼────────┐
-        ↓        ↓        ↓
-        Computer  Robot    Cloud
-        ```
+            Artificial Superintelligence (ASI)
+            ```
 
-        Therefore:
+            However, this should **not** be interpreted as a guaranteed development path.
 
-        > **AGI ≠ Robot**
+            ---
 
-        ---
+            # 7. Is AGI Already Here?
 
-        # 6. AGI vs Superintelligence
+            There is **no universally accepted definition or definitive test for AGI**, so claims about whether a particular current AI system qualifies as AGI depend heavily on the criteria being used.
 
-        AGI should also be distinguished from **Artificial Superintelligence (ASI)**.
+            Modern AI systems can demonstrate impressive capabilities across many domains, but **highly capable AI is not automatically equivalent to AGI**.
 
-        ### AGI
+            The central question is whether a system can reliably demonstrate the broad **learning, reasoning, generalization, and adaptation** expected from general intelligence across a sufficiently wide range of tasks and unfamiliar situations.
 
-        A hypothetical AI system with broad, general-purpose intelligence capable of handling a wide range of intellectual tasks.
+            ---
 
-        ### ASI
+            # 8. The Fundamental Difference
 
-        A hypothetical AI system whose general intellectual capabilities **far exceed those of humans** across essentially all relevant cognitive domains.
+            The simplest way to remember the distinction is:
 
-        A simplified conceptual model is:
+            ### **AI**
 
-        ```text
-        Narrow AI
-            ↓
-        Artificial General Intelligence (AGI)
-            ↓
-        Artificial Superintelligence (ASI)
-        ```
+            > **Build intelligent systems that can perform useful tasks.**
 
-        However, this should **not** be interpreted as a guaranteed development path.
+            ### **AGI**
 
-        ---
+            > **Build a general-purpose intelligent system that can learn, reason, adapt, and solve a broad range of new problems across different domains.**
 
-        # 7. Is AGI Already Here?
+            ---
 
-        There is **no universally accepted definition or definitive test for AGI**, so claims about whether a particular current AI system qualifies as AGI depend heavily on the criteria being used.
+            ## Final Mental Model
 
-        Modern AI systems can demonstrate impressive capabilities across many domains, but **highly capable AI is not automatically equivalent to AGI**.
+            ```text
+                            ARTIFICIAL INTELLIGENCE
+                                    │
+                        ┌────────────┴────────────┐
+                        ↓                         ↓
+                    NARROW AI                    AGI
+                Specific / Limited          General Purpose
+                    Intelligence                Intelligence
+                        │                         │
+                Specific Tasks            Multiple Domains
+                        │                         │
+                Defined Capability       Learn + Reason + Adapt
+                                                │
+                                                ↓
+                                            AGI Concept
+                                                │
+                                                ↓
+                                                ASI
+            ```
 
-        The central question is whether a system can reliably demonstrate the broad **learning, reasoning, generalization, and adaptation** expected from general intelligence across a sufficiently wide range of tasks and unfamiliar situations.
+            * **ASI (Artificial Superintelligence)** is a hypothetical concept involving intelligence that substantially exceeds human capabilities.
 
-        ---
+            ### **In one sentence:**
 
-        # 8. The Fundamental Difference
-
-        The simplest way to remember the distinction is:
-
-        ### **AI**
-
-        > **Build intelligent systems that can perform useful tasks.**
-
-        ### **AGI**
-
-        > **Build a general-purpose intelligent system that can learn, reason, adapt, and solve a broad range of new problems across different domains.**
-
-        ---
-
-        ## Final Mental Model
-
-        ```text
-                        ARTIFICIAL INTELLIGENCE
-                                │
-                    ┌────────────┴────────────┐
-                    ↓                         ↓
-                NARROW AI                    AGI
-            Specific / Limited          General Purpose
-                Intelligence                Intelligence
-                    │                         │
-            Specific Tasks            Multiple Domains
-                    │                         │
-            Defined Capability       Learn + Reason + Adapt
-                                            │
-                                            ↓
-                                        AGI Concept
-                                            │
-                                            ↓
-                                            ASI*
-        ```
-
-        * **ASI (Artificial Superintelligence)** is a hypothetical concept involving intelligence that substantially exceeds human capabilities.
-
-        ### **In one sentence:**
-
-        > **AI is the broader field of building intelligent machines, while AGI represents the goal of creating a general-purpose intelligence that can learn, reason, adapt, and apply its capabilities across a wide range of tasks and domains.**
+            > **AI is the broader field of building intelligent machines, while AGI represents the goal of creating a general-purpose intelligence that can learn, reason, adapt, and apply its capabilities across a wide range of tasks and domains.**
 
         ''')
+        st.divider()
+
+
