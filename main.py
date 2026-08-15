@@ -1112,5 +1112,582 @@ if select == 'LLM\'s':
 
     if st.session_state.embeddings == True:
         st.write('''
-        
+        # Embeddings in Artificial Intelligence
+
+        ## 1. What are Embeddings?
+
+        **Embeddings are numerical vector representations of data such as text, images, audio, or other information.**
+
+        They convert complex data into a mathematical form that AI systems can process, compare, search, and analyze.
+
+        For example:
+
+        ```text
+        "Python programming"
+                ↓
+        Embedding Model
+                ↓
+        [0.21, -0.54, 0.87, 0.14, ...]
+        ```
+
+        The resulting list of numbers is called an **embedding vector**.
+
+        > **An embedding represents information in a numerical vector space where relationships and similarities can be measured mathematically.**
+
+        ---
+
+        # 2. Why Do We Need Embeddings?
+
+        Computers cannot naturally understand the meaning of human language in the same way humans do.
+
+        Consider:
+
+        ```text
+        "I love Python programming."
+
+        "I enjoy coding in Python."
+        ```
+
+        These sentences use different words, but their meanings are very similar.
+
+        Embeddings convert them into vectors so that an AI system can mathematically determine that they are semantically related.
+
+        Conceptually:
+
+        ```text
+        Sentence A → [0.12, 0.45, -0.32, ...]
+        Sentence B → [0.15, 0.42, -0.29, ...]
+        ```
+
+        Because their representations are similar, the vectors can be close to each other in the embedding space.
+
+        ---
+
+        # 3. Embedding Vector
+
+        An embedding is represented as a vector containing many numerical values.
+
+        For example:
+
+        ```text
+        "Cat"
+            ↓
+        [0.21, -0.43, 0.76, 0.18, -0.09, ...]
+        ```
+
+        Real embedding vectors can contain **hundreds or thousands of dimensions**, depending on the embedding model.
+
+        Each dimension is not normally interpreted as one simple human-readable feature. Instead, information is distributed across many dimensions.
+
+        ---
+
+        # 4. Semantic Similarity
+
+        One of the most important properties of embeddings is that they can represent **semantic relationships**.
+
+        For example:
+
+        ```text
+        "Dog"
+        "Cat"
+        "Pet"
+        ```
+
+        may have relatively similar representations because they are semantically related.
+
+        Whereas:
+
+        ```text
+        "Dog"
+        "Database"
+        ```
+
+        would generally be much less similar.
+
+        Conceptually:
+
+        ```text
+                Dog
+                ●
+            /   \
+            ●     ●
+            Cat    Pet
+
+
+                            Database
+                                ●
+        ```
+
+        The actual embedding space is usually hundreds or thousands of dimensions rather than a simple 2D diagram.
+
+        ---
+
+        # 5. How Embeddings Work
+
+        A simplified embedding pipeline is:
+
+        ```text
+        Input Data
+            ↓
+        Embedding Model
+            ↓
+        Numerical Vector
+            ↓
+        Vector Representation
+            ↓
+        Similarity / Search / Retrieval
+        ```
+
+        For text:
+
+        ```text
+        Text
+        ↓
+        Tokenizer / Text Processing
+        ↓
+        Embedding Model
+        ↓
+        Vector
+        ```
+
+        The embedding model is trained to produce representations that are useful for particular semantic or similarity-based tasks.
+
+        ---
+
+        # 6. Embeddings vs Tokenization
+
+        These two concepts are related but different.
+
+        ### Tokenization
+
+        Tokenization breaks text into smaller units called **tokens**.
+
+        ```text
+        "Python is powerful"
+                ↓
+        ["Python", " is", " powerful"]
+        ```
+
+        ### Embedding
+
+        An embedding converts text or tokens into a numerical vector representation.
+
+        ```text
+        "Python programming"
+                ↓
+        [0.21, -0.54, 0.87, ...]
+        ```
+
+        A simplified pipeline is:
+
+        ```text
+        Text
+        ↓
+        Tokenization
+        ↓
+        Tokens / Token IDs
+        ↓
+        Embedding
+        ↓
+        Vectors
+        ```
+
+        ---
+
+        # 7. Similarity Search
+
+        One of the most important applications of embeddings is **semantic similarity search**.
+
+        Suppose you have thousands of documents.
+
+        The user searches:
+
+        > **"How can I learn Python?"**
+
+        A document may contain:
+
+        > **"A beginner's guide to Python programming."**
+
+        The exact words are different, but the meaning is similar.
+
+        Embedding-based search works like this:
+
+        ```text
+        User Query
+            ↓
+        Query Embedding
+            ↓
+        Query Vector
+            ↓
+        Compare with Document Vectors
+            ↓
+        Find Most Similar Vectors
+            ↓
+        Retrieve Relevant Documents
+        ```
+
+        This is called **semantic search**.
+
+        ---
+
+        # 8. Measuring Similarity
+
+        AI systems can compare embedding vectors mathematically.
+
+        One commonly used method is **Cosine Similarity**.
+
+        The formula is:
+    
+        Cosine Similarity=A⋅B​/
+                        ∥A∥∥B∥
+
+        It measures the angle between two vectors.
+
+        Conceptually:
+
+        ```text
+        High similarity
+                ↓
+        Vectors point in similar directions
+        ```
+
+        ```text
+        Low similarity
+                ↓
+        Vectors point in different directions
+        ```
+
+        Cosine similarity is widely used in semantic search and retrieval systems, although other distance or similarity metrics can also be used.
+
+        ---
+
+        # 9. Embeddings and Vector Databases
+
+        Embedding vectors are often stored in a **vector database**.
+
+        Examples include:
+
+        * Pinecone
+        * Qdrant
+        * Weaviate
+        * Milvus
+        * Chroma
+
+        A simplified structure is:
+
+        ```text
+        Document A → Embedding Vector
+        Document B → Embedding Vector
+        Document C → Embedding Vector
+        ```
+
+        When a user asks a question:
+
+        ```text
+        User Query
+            ↓
+        Query Embedding
+            ↓
+        Vector Database
+            ↓
+        Similarity Search
+            ↓
+        Most Relevant Documents
+        ```
+
+        The retrieved information can then be passed to an LLM.
+
+        ---
+
+        # 10. Embeddings in RAG
+
+        Embeddings are a fundamental component of **RAG (Retrieval-Augmented Generation)** systems.
+
+        Suppose a company has thousands of private documents.
+
+        The system can process them like this:
+
+        ```text
+        Company Documents
+            ↓
+        Chunking
+            ↓
+        Embedding Model
+            ↓
+        Document Embeddings
+            ↓
+        Vector Database
+        ```
+
+        When the user asks:
+
+        > **"What is our company's leave policy?"**
+
+        The system performs:
+
+        ```text
+        User Question
+            ↓
+        Query Embedding
+            ↓
+        Vector Search
+            ↓
+        Relevant Document Chunks
+            ↓
+        LLM
+            ↓
+        Final Answer
+        ```
+
+        The embeddings help the system **find the most relevant information** before the LLM generates the answer.
+
+        ---
+
+        # 11. Embeddings Are Not Only for Text
+
+        Embeddings can represent different types of data.
+
+        ### Text Embeddings
+
+        ```text
+        "Machine Learning"
+                ↓
+        Vector
+        ```
+
+        ### Image Embeddings
+
+        ```text
+        Image
+        ↓
+        Vector
+        ```
+
+        ### Audio Embeddings
+
+        ```text
+        Audio
+        ↓
+        Vector
+        ```
+
+        This makes embeddings useful for **multimodal AI systems** as well.
+
+        ---
+
+        # 12. Embeddings in Recommendation Systems
+
+        Embeddings can also represent users and items.
+
+        For example:
+
+        ```text
+        User Preferences
+            ↓
+        User Embedding
+        ```
+
+        and:
+
+        ```text
+        Movie
+        ↓
+        Movie Embedding
+        ```
+
+        The system can compare these representations to identify items that may be relevant to the user.
+
+        A similar approach can be used for:
+
+        * Movies
+        * Music
+        * Products
+        * Videos
+        * Articles
+        * Courses
+
+        ---
+
+        # 13. Embeddings in LLMs
+
+        There are two related concepts that should not be confused.
+
+        ### Token Embeddings
+
+        LLMs internally convert tokens into vector representations before processing them through the Transformer.
+
+        ```text
+        Token
+        ↓
+        Token ID
+        ↓
+        Embedding Vector
+        ↓
+        Transformer
+        ```
+
+        ### Dedicated Embedding Models
+
+        Separate embedding models are designed primarily to generate useful vectors for:
+
+        * Semantic search
+        * RAG
+        * Retrieval
+        * Similarity detection
+        * Clustering
+        * Recommendation
+        * Classification
+
+        Therefore:
+
+        > **Token embeddings help an LLM process language, while dedicated embedding models are commonly used to create vector representations for downstream AI applications.**
+
+        ---
+
+        # 14. Embeddings vs Traditional Keyword Search
+
+        Traditional keyword search looks primarily for matching words.
+
+        For example:
+
+        ```text
+        Query:
+        "How to learn Python?"
+        ```
+
+        A keyword system focuses on terms such as:
+
+        ```text
+        learn
+        Python
+        ```
+
+        An embedding-based search can identify related meaning such as:
+
+        ```text
+        "Beginner's guide to Python programming"
+        ```
+
+        even when the exact wording is different.
+
+        Therefore:
+
+        > **Keyword search focuses heavily on matching terms, while semantic search using embeddings focuses on similarity in meaning and representation.**
+
+        ---
+
+        # 15. Real-World AI Engineering Example
+
+        Imagine you are building an AI learning assistant.
+
+        You have:
+
+        ```text
+        10,000
+        PDFs + Notes + Tutorials + Documentation
+        ```
+
+        You want students to ask questions about them.
+
+        Your architecture could be:
+
+        ```text
+        Documents
+        ↓
+        Chunking
+        ↓
+        Embedding Model
+        ↓
+        Vector Database
+        ↓
+                ↑
+        User Question
+                ↓
+        Query Embedding
+                ↓
+        Similarity Search
+                ↓
+        Relevant Chunks
+                ↓
+            LLM
+                ↓
+            Answer
+        ```
+
+        Here, embeddings solve the **information retrieval problem**, while the LLM handles **language generation and response construction**.
+
+        ---
+
+        # 16. Important Limitations
+
+        Embeddings are powerful, but they are not perfect.
+
+        Their quality depends on factors such as:
+
+        * The embedding model
+        * The quality of the input data
+        * Chunking strategy
+        * Similarity metric
+        * Vector database configuration
+        * Query formulation
+        * Domain-specific vocabulary
+
+        A poor embedding or poor document chunking strategy can lead to irrelevant retrieval.
+
+        ---
+
+        # 17. Key Applications of Embeddings
+
+        ```text
+        Embeddings
+        │
+        ├── Semantic Search
+        ├── RAG
+        ├── Vector Databases
+        ├── Recommendation Systems
+        ├── Similarity Detection
+        ├── Duplicate Detection
+        ├── Document Retrieval
+        ├── Clustering
+        ├── Classification
+        └── Multimodal Search
+        ```
+
+        ---
+
+        # 18. Embeddings — Complete Flow
+
+        The most important flow to remember is:
+
+        ```text
+                    DATA
+                    ↓
+                Embedding Model
+                    ↓
+                Vector Representation
+                    ↓
+                Vector Database
+                    ↓
+            Similarity Search
+                    ↓
+            Relevant Information
+                    ↓
+                    LLM
+                    ↓
+                Final Response
+        ```
+
+        ## Final Definition
+
+        > **An embedding is a numerical vector representation of data that captures useful semantic or contextual relationships, allowing AI systems to compare, search, retrieve, organize, and process information mathematically.**
+
+        ### One-line takeaway
+
+        > **Embeddings convert information into vectors so that AI systems can understand relationships and measure similarity mathematically.**
+            
+        ''')
+
+    if st.session_state.training == True:
+        st.write('''
+
         ''')
