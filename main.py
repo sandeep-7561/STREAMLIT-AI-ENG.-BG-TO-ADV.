@@ -573,4 +573,544 @@ if select == 'LLM\'s':
         ''')
         st.divider()
 
+    if st.session_state.llms == True:
+        st.write('''
+        # Large Language Models (LLMs)
 
+        ## 1. What is an LLM?
+
+        **LLM stands for Large Language Model.**
+
+        A Large Language Model is a type of **deep learning model** designed to understand and generate human language. LLMs are trained on very large amounts of text and other data so they can learn patterns, relationships, structures, and representations within language.
+
+        Modern LLMs are primarily based on the **Transformer architecture**.
+
+        Examples of well-known LLMs include:
+
+        * GPT
+        * Claude
+        * Gemini
+        * Llama
+        * Mistral
+
+        The fundamental idea behind an LLM is:
+
+        > **Given the context, predict the next token and use that prediction repeatedly to generate a response.**
+
+        ---
+
+        # 2. Why is it called a "Large" Language Model?
+
+        The word **Large** refers mainly to the scale of the model and its training process.
+
+        Large models can have:
+
+        * Billions or more parameters
+        * Very large training datasets
+        * Large computational requirements
+        * Large neural network architectures
+
+        A **parameter** is a numerical value learned during training that helps the neural network determine how information should be processed.
+
+        In simple terms:
+
+        > **More parameters and larger training systems can allow a model to learn much more complex patterns, although bigger does not automatically mean better.**
+
+        ---
+
+        # 3. How Does an LLM Work?
+
+        A simplified LLM pipeline looks like this:
+
+        ```text
+        User Prompt
+            ↓
+        Tokenization
+            ↓
+        Token IDs
+            ↓
+        Embeddings
+            ↓
+        Transformer Layers
+            ↓
+        Self-Attention
+            ↓
+        Neural Network Computation
+            ↓
+        Next-Token Probability
+            ↓
+        Next Token
+            ↓
+        Repeat
+            ↓
+        Final Response
+        ```
+
+        Let's understand the important stages.
+
+        ---
+
+        # 4. Tokenization
+
+        An LLM does not directly process raw text like a human.
+
+        The input text is first converted into **tokens**.
+
+        For example:
+
+        ```text
+        "Python is powerful"
+        ```
+
+        may be represented approximately as:
+
+        ```text
+        ["Python", " is", " powerful"]
+        ```
+
+        Depending on the tokenizer, a word may also be split into smaller pieces.
+
+        Each token is then converted into a numerical **token ID** that the model can process.
+
+        ---
+
+        # 5. Embeddings
+
+        Token IDs are converted into numerical vectors called **embeddings**.
+
+        Conceptually:
+
+        ```text
+        Python
+        ↓
+        [0.21, -0.73, 0.44, 0.91, ...]
+        ```
+
+        These vectors provide a mathematical representation of tokens that the neural network can process.
+
+        Embeddings allow the model to represent relationships and patterns between different tokens.
+
+        ---
+
+        # 6. Transformer Architecture
+
+        Most modern LLMs use the **Transformer architecture**.
+
+        A Transformer contains multiple neural network layers that process the input context.
+
+        A simplified representation is:
+
+        ```text
+        Input Embeddings
+            ↓
+        Self-Attention
+            ↓
+        Feed-Forward Network
+            ↓
+        Normalization
+            ↓
+        Next Transformer Layer
+            ↓
+        ...
+            ↓
+        Output
+        ```
+
+        Large LLMs can contain many Transformer layers.
+
+        ---
+
+        # 7. Self-Attention
+
+        **Self-attention** is one of the most important mechanisms in a Transformer.
+
+        It allows the model to determine which parts of the input context are more relevant to each other.
+
+        For example:
+
+        > **"The developer opened the laptop because it was slow."**
+
+        The model needs to understand what **"it"** refers to.
+
+        Self-attention helps the model calculate relationships between the tokens in the sentence.
+
+        Technically, attention uses:
+
+        * **Query (Q)**
+        * **Key (K)**
+        * **Value (V)**
+
+        A simplified attention equation is:
+
+        [
+        Attention(Q,K,V)=softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+        ]
+
+        The resulting attention weights determine how information from different tokens contributes to the current representation.
+
+        ---
+
+        # 8. Next-Token Prediction
+
+        The core generation mechanism of an LLM is **next-token prediction**.
+
+        Suppose the input is:
+
+        > **"The capital of France is"**
+
+        The model calculates probabilities for possible next tokens.
+
+        Conceptually:
+
+        ```text
+        Paris     → 0.97
+        London    → 0.01
+        Berlin    → 0.005
+        Madrid    → 0.003
+        ```
+
+        The model selects a token according to its decoding strategy.
+
+        The sequence then becomes:
+
+        ```text
+        The capital of France is Paris
+        ```
+
+        The model predicts the next token again.
+
+        This process continues until the response is complete.
+
+        > **An LLM generates text sequentially, token by token.**
+
+        ---
+
+        # 9. How is an LLM Trained?
+
+        During training, the model processes huge amounts of data and repeatedly attempts to predict missing or subsequent tokens.
+
+        For example:
+
+        ```text
+        "The sun rises in the ___"
+        ```
+
+        The model may initially produce an incorrect prediction.
+
+        The correct target is:
+
+        > **east**
+
+        The difference between the model's prediction and the expected target contributes to the **loss**.
+
+        The training process then uses:
+
+        ```text
+        Prediction
+            ↓
+        Loss Calculation
+            ↓
+        Backpropagation
+            ↓
+        Gradient Calculation
+            ↓
+        Weight Update
+        ```
+
+        This process is repeated across a very large number of training examples.
+
+        Over time, the model learns complex patterns in language and other training data.
+
+        ---
+
+        # 10. What Does an LLM Learn?
+
+        An LLM does not simply memorize a collection of question-and-answer pairs.
+
+        During training, its neural network parameters are adjusted to represent learned patterns and relationships.
+
+        These can include patterns related to:
+
+        * Grammar
+        * Syntax
+        * Semantics
+        * Language structure
+        * Programming
+        * Reasoning patterns
+        * General knowledge
+        * Relationships between concepts
+
+        This learned representation allows the model to generate new combinations of information rather than only returning exact stored sentences.
+
+        ---
+
+        # 11. LLMs Are Not Traditional Databases
+
+        An LLM should not be thought of as a normal database.
+
+        ### Database
+
+        ```text
+        Query
+        ↓
+        Search stored records
+        ↓
+        Return matching data
+        ```
+
+        ### LLM
+
+        ```text
+        Prompt
+        ↓
+        Neural Network Computation
+        ↓
+        Probability Distribution
+        ↓
+        Token Generation
+        ↓
+        Response
+        ```
+
+        Because an LLM generates text probabilistically, it can sometimes produce information that is incorrect.
+
+        This is commonly referred to as an **AI hallucination**.
+
+        ---
+
+        # 12. Example of LLM Generation
+
+        Suppose the user asks:
+
+        > **"Explain Python loops."**
+
+        The LLM receives the prompt and processes it through its Transformer architecture.
+
+        It then generates tokens progressively:
+
+        ```text
+        Python
+        ↓
+        Python loops
+        ↓
+        Python loops are
+        ↓
+        Python loops are used
+        ↓
+        Python loops are used to
+        ↓
+        Python loops are used to repeat
+        ↓
+        ...
+        ```
+
+        Eventually, these tokens form the complete response.
+
+        ---
+
+        # 13. LLMs and Context
+
+        An LLM uses the available **context** to generate its next tokens.
+
+        For example:
+
+        ```text
+        User:
+        What is Python?
+
+        Assistant:
+        Python is a programming language...
+
+        User:
+        What is it used for?
+        ```
+
+        The model uses the previous conversation context to interpret what **"it"** refers to.
+
+        However, context handling has limits, which are related to the model's **context window**.
+
+        ---
+
+        # 14. What is a Context Window?
+
+        A **context window** is the amount of text or tokens that an LLM can process as context during an interaction.
+
+        Conceptually:
+
+        ```text
+        Context Window
+        ┌───────────────────────────────┐
+        │ System Instructions           │
+        │ Previous Conversation         │
+        │ User Prompt                   │
+        │ Documents / Retrieved Data    │
+        └───────────────────────────────┘
+                        ↓
+                    LLM
+                        ↓
+                    Response
+        ```
+
+        Larger context windows allow models to work with more information in a single interaction.
+
+        ---
+
+        # 15. LLM vs Traditional Machine Learning
+
+        Traditional machine learning models are often designed for specific tasks.
+
+        For example:
+
+        ```text
+        Input Data
+        ↓
+        ML Model
+        ↓
+        Prediction
+        ```
+
+        An LLM is a **general-purpose language model** that can be adapted to many language-based tasks.
+
+        For example, the same LLM can potentially be used for:
+
+        * Question answering
+        * Summarization
+        * Translation
+        * Code generation
+        * Classification
+        * Content generation
+        * Information extraction
+        * Conversational assistants
+
+        ---
+
+        # 16. LLMs in Real-World AI Applications
+
+        An LLM is often only one component of a complete AI system.
+
+        A production AI application may look like:
+
+        ```text
+        User
+        ↓
+        Frontend
+        ↓
+        Backend
+        ↓
+        LLM
+        ├── RAG
+        ├── Vector Database
+        ├── APIs
+        ├── Tools
+        └── Memory
+        ↓
+        Response
+        ```
+
+        This is where **AI Engineering** becomes important.
+
+        AI Engineers take models such as LLMs and integrate them with software systems to create useful applications.
+
+        ---
+
+        # 17. LLM + RAG
+
+        A standalone LLM may not know your private company documents or the latest information.
+
+        **RAG (Retrieval-Augmented Generation)** can provide relevant external information to the model.
+
+        Simplified flow:
+
+        ```text
+        User Question
+            ↓
+        Retrieve Relevant Documents
+            ↓
+        Relevant Context
+            ↓
+        LLM
+            ↓
+        Generated Answer
+        ```
+
+        This allows an LLM application to answer questions using information retrieved from external knowledge sources.
+
+        ---
+
+        # 18. LLM + Tools
+
+        LLMs can also be connected to external tools.
+
+        For example:
+
+        ```text
+        User
+        ↓
+        LLM
+        ├── Calculator
+        ├── Web Search
+        ├── Database
+        ├── Python
+        ├── APIs
+        └── File System
+        ↓
+        Final Response
+        ```
+
+        This allows an AI application to perform actions rather than only generating text.
+
+        ---
+
+        # 19. Key Limitations of LLMs
+
+        LLMs are powerful, but they are not perfect.
+
+        Common limitations include:
+
+        * Hallucinations
+        * Outdated knowledge depending on the model and setup
+        * Limited context
+        * Reasoning failures
+        * Sensitivity to prompts
+        * Computational cost
+        * Latency
+        * Bias in training data
+        * Lack of guaranteed factual accuracy
+
+        Therefore, production AI systems often require **retrieval, validation, tool use, monitoring, evaluation, and guardrails**.
+
+        ---
+
+        # 20. LLM — Key Takeaway
+
+        > **A Large Language Model is a large neural network, typically based on the Transformer architecture, trained on massive datasets to learn patterns in language and generate responses by predicting the next token from the available context.**
+
+        The most important concepts to remember are:
+
+        ```text
+        LLM
+        │
+        ├── Tokenization
+        ├── Embeddings
+        ├── Transformer
+        ├── Self-Attention
+        ├── Training
+        ├── Parameters
+        ├── Context Window
+        ├── Next-Token Prediction
+        ├── Fine-Tuning
+        ├── RAG
+        ├── Tool Use
+        └── AI Applications
+        ```
+
+        ### **One-line definition**
+
+        > **An LLM is a Transformer-based neural network trained on large-scale data that generates language by predicting tokens based on the context it receives.**
+
+        ''')
+
+    if st.session_state.embeddings == True:
+        st.write('''
+        
+        ''')
