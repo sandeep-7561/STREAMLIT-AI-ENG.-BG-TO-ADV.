@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from llms_notes.Common_terminology import AI_AGI,LLMs,Embeddings,Training,Inference,Vector_database
+from llms_notes.Common_terminology import AI_AGI,LLMs,Embeddings,Training,Inference,Vector_database,ai_agent
 from Introduction_notes.introduction import Intraduction
 
 
@@ -259,3 +259,5 @@ if select == 'LLM\'s':
         st.write(Inference)
     if st.session_state.Vector_Databases == True:
         st.write(Vector_database)
+    if st.session_state.AI_Agents == True:
+        st.write(ai_agent)
