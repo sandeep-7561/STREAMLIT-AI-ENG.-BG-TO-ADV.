@@ -3783,3 +3783,661 @@ Feedback
 ```
 
 '''
+
+
+Rags = '''
+# Retrieval-Augmented Generation (RAG)
+
+## 1. What is RAG?
+
+**RAG stands for Retrieval-Augmented Generation.**
+
+RAG is an AI architecture that combines **information retrieval** with **LLM-based generation**.
+
+Instead of asking an LLM to answer a question only from what it learned during training, RAG first retrieves **relevant information from an external knowledge source** and provides that information to the LLM as context.
+
+> **RAG retrieves relevant information and gives it to an LLM so the model can generate a more relevant and grounded response.**
+
+---
+
+# 2. Why is RAG Needed?
+
+An LLM has limitations.
+
+For example, a general-purpose LLM may not know:
+
+* A company's private documents
+* Your personal notes
+* Internal product documentation
+* A newly updated knowledge base
+* Information stored in your own database
+
+Instead of retraining the entire model whenever this information changes, RAG can retrieve the required information at **inference time**.
+
+Example:
+
+```text
+User:
+"What is our company's leave policy?"
+
+        ↓
+
+Retrieve information from company documents
+
+        ↓
+
+LLM
+
+        ↓
+
+Answer
+```
+
+---
+
+# 3. What Does RAG Stand For?
+
+RAG has three important concepts:
+
+### Retrieval
+
+Finding relevant information from an external knowledge source.
+
+### Augmented
+
+Adding the retrieved information to the context given to the LLM.
+
+### Generation
+
+Using the LLM to generate the final answer from the question and retrieved context.
+
+Therefore:
+
+```text
+Retrieval
+    ↓
+Augmentation
+    ↓
+Generation
+```
+
+---
+
+# 4. Basic RAG Architecture
+
+A simple RAG system can be represented as:
+
+```text
+User Question
+      ↓
+Query Embedding
+      ↓
+Vector Search
+      ↓
+Relevant Documents / Chunks
+      ↓
+Context + Question
+      ↓
+LLM
+      ↓
+Final Answer
+```
+
+The knowledge base is prepared separately:
+
+```text
+Documents
+    ↓
+Text Extraction
+    ↓
+Chunking
+    ↓
+Embedding Model
+    ↓
+Vector Database
+```
+
+---
+
+# 5. Step 1 — Document Collection
+
+The first step is to collect the information that the AI system should be able to retrieve.
+
+Examples include:
+
+* PDFs
+* Websites
+* Documentation
+* Text files
+* Company knowledge bases
+* Databases
+* Research papers
+* Product manuals
+
+For example:
+
+```text
+Company Documents
+├── HR Policy.pdf
+├── Leave Policy.pdf
+├── Employee Handbook.pdf
+└── Salary Policy.pdf
+```
+
+---
+
+# 6. Step 2 — Text Extraction
+
+Documents are converted into machine-readable text.
+
+For example:
+
+```text
+PDF
+ ↓
+Text Extraction
+ ↓
+Raw Text
+```
+
+The extraction method depends on the source.
+
+For PDFs, the system may extract text page by page.
+
+---
+
+# 7. Step 3 — Chunking
+
+Large documents are split into smaller pieces called **chunks**.
+
+For example:
+
+```text
+Large Document
+      ↓
+Chunk 1
+Chunk 2
+Chunk 3
+Chunk 4
+...
+Chunk 500
+```
+
+A chunk could contain a paragraph, section, or several related sentences.
+
+### Why is chunking important?
+
+The entire document may be too large or unnecessarily broad for a single query.
+
+Chunking allows the retrieval system to find the **specific parts that are most relevant** to the user's question.
+
+---
+
+# 8. Step 4 — Generate Embeddings
+
+Each document chunk is converted into a vector using an **embedding model**.
+
+For example:
+
+```text
+"Employees are entitled to 12 casual leaves per year."
+                    ↓
+             Embedding Model
+                    ↓
+[0.21, -0.42, 0.76, 0.18, ...]
+```
+
+The resulting vector represents the information mathematically.
+
+---
+
+# 9. Step 5 — Store Embeddings in a Vector Database
+
+The embeddings are stored in a **vector database**.
+
+Examples include:
+
+* Chroma
+* Qdrant
+* Pinecone
+* Weaviate
+* Milvus
+* PostgreSQL with pgvector
+
+A vector may be stored together with metadata:
+
+```text
+Vector
+[0.21, -0.42, 0.76, ...]
+
+Metadata
+{
+    "source": "LeavePolicy.pdf",
+    "page": 12,
+    "chunk": 5
+}
+```
+
+The vector database allows the system to efficiently search for similar vectors.
+
+---
+
+# 10. Step 6 — User Asks a Question
+
+Suppose the user asks:
+
+> **"How many casual leaves do employees get?"**
+
+The user's question is also converted into an embedding.
+
+```text
+User Question
+      ↓
+Embedding Model
+      ↓
+Query Vector
+```
+
+---
+
+# 11. Step 7 — Retrieval
+
+The query vector is compared against the vectors stored in the vector database.
+
+Conceptually:
+
+```text
+Query
+  ↕
+Chunk 1 → Low Similarity
+Chunk 2 → High Similarity
+Chunk 3 → Low Similarity
+Chunk 4 → High Similarity
+```
+
+The system retrieves the most relevant chunks.
+
+This is called **retrieval**.
+
+For example:
+
+```text
+Top-K Relevant Chunks
+        ↓
+Chunk 17
+Chunk 43
+Chunk 91
+```
+
+---
+
+# 12. Step 8 — Augment the Prompt
+
+The retrieved information is then added to the LLM's context.
+
+For example:
+
+```text
+Context:
+"Employees are entitled to 12 casual leaves per year."
+
+Question:
+"How many casual leaves do employees get?"
+```
+
+The LLM receives both:
+
+* The user's question
+* The retrieved context
+
+This is the **augmentation** part of RAG.
+
+---
+
+# 13. Step 9 — Generation
+
+The LLM uses the retrieved context to generate the final response.
+
+For example:
+
+> **"Employees are entitled to 12 casual leaves per year."**
+
+This is the **generation** stage.
+
+The LLM is responsible for turning the retrieved information into a natural-language response.
+
+---
+
+# 14. Complete RAG Pipeline
+
+```text
+                    KNOWLEDGE BASE
+                         ↓
+                     Documents
+                         ↓
+                      Chunking
+                         ↓
+                  Embedding Model
+                         ↓
+                  Vector Database
+                         │
+                         │
+                         ↓
+                    User Question
+                         ↓
+                   Query Embedding
+                         ↓
+                   Similarity Search
+                         ↓
+                  Relevant Chunks
+                         ↓
+                Context + Question
+                         ↓
+                        LLM
+                         ↓
+                  Generated Answer
+```
+
+---
+
+# 15. RAG vs Normal LLM
+
+## Without RAG
+
+```text
+User Question
+      ↓
+LLM
+      ↓
+Answer
+```
+
+The LLM primarily relies on its learned parameters and the context supplied directly to it.
+
+## With RAG
+
+```text
+User Question
+      ↓
+Retrieve External Information
+      ↓
+Relevant Context
+      ↓
+LLM
+      ↓
+Answer
+```
+
+The model receives additional information from an external knowledge source.
+
+---
+
+# 16. RAG vs Fine-Tuning
+
+RAG and fine-tuning solve different problems.
+
+### RAG
+
+Retrieves information at inference time.
+
+```text
+External Data
+     ↓
+Retrieve
+     ↓
+LLM
+```
+
+### Fine-Tuning
+
+Updates the model's parameters using additional training data.
+
+```text
+Training Data
+     ↓
+Training
+     ↓
+Updated Model
+```
+
+### Main Difference
+
+> **RAG provides external information to the model at inference time, while fine-tuning changes the model's learned parameters through additional training.**
+
+---
+
+# 17. Advantages of RAG
+
+### 1. Access to External Knowledge
+
+RAG allows an LLM to use information stored outside its original training data.
+
+### 2. Private Data
+
+RAG can be used with private organizational documents and internal knowledge bases.
+
+### 3. Easier Knowledge Updates
+
+When documents change, the knowledge base can be updated without necessarily retraining the base LLM.
+
+### 4. Grounded Responses
+
+Providing relevant source context can help the model produce responses grounded in the retrieved information.
+
+### 5. Reduced Need for Full Model Retraining
+
+Adding new documents does not generally require retraining the entire LLM.
+
+---
+
+# 18. Limitations of RAG
+
+RAG does not automatically guarantee correct answers.
+
+Problems can occur when:
+
+* The wrong chunks are retrieved
+* Documents are incomplete
+* Chunking is poor
+* The embedding model is not suitable
+* The query is ambiguous
+* Too much irrelevant context is retrieved
+* The LLM incorrectly interprets the retrieved information
+
+Therefore, high-quality RAG systems require careful **retrieval design, evaluation, and monitoring**.
+
+---
+
+# 19. Advanced RAG
+
+A basic RAG system may use only vector similarity search.
+
+A more advanced system can use:
+
+```text
+User Query
+    ↓
+Query Processing
+    ↓
+Hybrid Search
+ ┌───────────────┐
+ │ Vector Search │
+ │ Keyword Search│
+ └───────────────┘
+    ↓
+Reranking
+    ↓
+Relevant Chunks
+    ↓
+Context Optimization
+    ↓
+LLM
+    ↓
+Answer + Sources
+```
+
+### Hybrid Search
+
+Combines semantic/vector search with keyword-based search.
+
+### Reranking
+
+Reorders retrieved documents based on their relevance to the query.
+
+### Context Optimization
+
+Selects or compresses the most useful information before sending it to the LLM.
+
+---
+
+# 20. RAG Example — Company Knowledge Assistant
+
+Suppose a company has:
+
+```text
+500 PDFs
+10,000 Documents
+50,000 Document Chunks
+```
+
+A user asks:
+
+> **"How many casual leaves are available to employees?"**
+
+The system performs:
+
+```text
+Question
+   ↓
+Query Embedding
+   ↓
+Vector Search
+   ↓
+Relevant HR Policy Chunk
+   ↓
+LLM
+   ↓
+"Employees receive 12 casual leaves per year."
+```
+
+The LLM did not need to memorize the company's HR policy during its original training. The relevant policy was **retrieved from the company's knowledge base**.
+
+---
+
+# 21. RAG Without an External AI API
+
+RAG does not require OpenAI, Gemini, or Claude APIs.
+
+A completely local RAG system can be built using:
+
+```text
+Documents
+    ↓
+Local Embedding Model
+    ↓
+Chroma / Qdrant
+    ↓
+Local LLM
+    ↓
+Ollama
+    ↓
+Answer
+```
+
+For example:
+
+```text
+Embedding Model → Sentence Transformers
+Vector Database → Chroma
+LLM → Qwen / Llama via Ollama
+Backend → Python
+Interface → Streamlit
+```
+
+The exact hardware requirements depend on the models being used.
+
+---
+
+# 22. RAG and AI Engineering
+
+RAG combines several important AI Engineering concepts:
+
+```text
+Document Processing
+       +
+Chunking
+       +
+Embeddings
+       +
+Vector Databases
+       +
+Information Retrieval
+       +
+LLMs
+       +
+Prompt Engineering
+       ↓
+      RAG
+```
+
+This makes RAG one of the most important architectures for building **knowledge-grounded LLM applications**.
+
+---
+
+# 23. Key Terms
+
+| Term                | Meaning                                                 |
+| ------------------- | ------------------------------------------------------- |
+| **RAG**             | Retrieval-Augmented Generation                          |
+| **Retrieval**       | Finding relevant information from a knowledge source    |
+| **Augmentation**    | Adding retrieved information to the LLM context         |
+| **Generation**      | Producing the final response using the LLM              |
+| **Chunk**           | A smaller piece of a document                           |
+| **Embedding**       | Numerical vector representation of information          |
+| **Vector Database** | Database optimized for storing and searching embeddings |
+| **Query Embedding** | Vector representation of the user's question            |
+| **Top-K Retrieval** | Selecting the K most relevant results                   |
+| **Reranking**       | Reordering retrieved results based on relevance         |
+| **Knowledge Base**  | Collection of information used for retrieval            |
+
+---
+
+# 24. RAG — Complete Mental Model
+
+```text
+                 KNOWLEDGE BASE
+                       ↓
+                   Documents
+                       ↓
+                    Chunks
+                       ↓
+                Embedding Model
+                       ↓
+                Vector Database
+                       ↓
+                ───────────────
+                       ↑
+                 User Question
+                       ↓
+                Query Embedding
+                       ↓
+                Similarity Search
+                       ↓
+               Relevant Context
+                       ↓
+                Context + Query
+                       ↓
+                      LLM
+                       ↓
+                Final Answer
+```
+
+## Final Definition
+
+> **Retrieval-Augmented Generation (RAG) is an architecture that retrieves relevant information from an external knowledge source and provides it as context to a language model, enabling the model to generate responses grounded in the retrieved information.**
+
+### One-line takeaway
+
+> **RAG = Retrieve relevant information → Augment the LLM with that context → Generate the answer.**
+
+'''
