@@ -4441,3 +4441,472 @@ This makes RAG one of the most important architectures for building **knowledge-
 > **RAG = Retrieve relevant information → Augment the LLM with that context → Generate the answer.**
 
 '''
+
+
+Context_window = '''
+# Context Window in Large Language Models
+
+## 1. What is a Context Window?
+
+A **context window** is the maximum amount of information, measured in **tokens**, that an AI model can process and consider at one time when generating a response.
+
+The context window can contain information such as:
+
+* System instructions
+* Previous conversation messages
+* Current user prompt
+* Retrieved documents
+* RAG context
+* Tool results
+* Other input provided to the model
+
+> **A context window defines how much information an AI model can consider at one time.**
+
+---
+
+# 2. What is a Token?
+
+A context window is measured in **tokens**, not simply words.
+
+A token can be:
+
+* A complete word
+* Part of a word
+* Punctuation
+* A symbol
+* A small piece of text
+
+For example:
+
+```text
+"Python is powerful"
+```
+
+may be split into several tokens.
+
+Therefore:
+
+> **100,000 tokens does not mean exactly 100,000 words.**
+
+The exact relationship between words and tokens depends on the tokenizer and language.
+
+---
+
+# 3. What Does the Context Window Contain?
+
+A model's context can include many different types of information:
+
+```text
+Context Window
+│
+├── System Instructions
+├── Conversation History
+├── Current User Prompt
+├── Retrieved Documents
+├── RAG Context
+├── Tool Results
+└── Other Input Information
+```
+
+The model processes this available context when generating its output.
+
+---
+
+# 4. Example of a Context Window
+
+Suppose a model supports a context window of:
+
+```text
+128,000 tokens
+```
+
+A request might contain:
+
+```text
+System Instructions     → 5,000 tokens
+Conversation History    → 20,000 tokens
+RAG Context             → 15,000 tokens
+User Prompt             → 1,000 tokens
+Tool Results            → 5,000 tokens
+```
+
+Total input:
+
+```text
+5,000
++20,000
++15,000
++ 1,000
++ 5,000
+----------------
+46,000 tokens
+```
+
+This fits within the model's context capacity, assuming the model/API's total input-output limits allow it.
+
+---
+
+# 5. How Does Context Affect an LLM?
+
+The model uses the information available in its context to understand the current task and generate an output.
+
+For example:
+
+```text
+User:
+I am learning Python.
+
+User:
+What language am I learning?
+```
+
+If the previous message is still available in the model's context, the model can use it to answer:
+
+> **Python.**
+
+The previous message provides relevant context for the current question.
+
+---
+
+# 6. Context Window Is Not Permanent Memory
+
+A context window should not be confused with long-term memory.
+
+### Context Window
+
+Contains information currently available to the model during an interaction.
+
+```text
+Current Conversation
+        ↓
+   Context Window
+        ↓
+        LLM
+```
+
+### Memory
+
+A separate mechanism can store information for future use.
+
+```text
+Important Information
+        ↓
+Persistent Memory
+        ↓
+Future Interaction
+```
+
+Therefore:
+
+> **Context is temporary working information; memory is a separate mechanism for retaining information beyond the current context.**
+
+---
+
+# 7. Context Window and RAG
+
+Context windows are especially important in **RAG systems**.
+
+Suppose you have a 1,000-page document.
+
+Sending the entire document to the LLM for every question may be inefficient or may exceed the available context capacity.
+
+RAG can retrieve only the relevant sections:
+
+```text
+1,000-Page Document
+        ↓
+Chunking
+        ↓
+Vector Database
+        ↓
+User Question
+        ↓
+Relevant Chunks
+        ↓
+LLM Context
+        ↓
+Answer
+```
+
+For example, if only three chunks contain information about the user's question, the system can provide those three chunks instead of the entire document.
+
+---
+
+# 8. Why Larger Context Windows Are Useful
+
+A larger context window allows a model to process more information in one interaction.
+
+It can be useful for:
+
+* Long conversations
+* Large documents
+* Large codebases
+* Multi-document analysis
+* Large RAG contexts
+* Complex tool outputs
+* Long-form reasoning tasks
+
+Conceptually:
+
+```text
+Small Context
+→ Less information available at one time
+
+Large Context
+→ More information available at one time
+```
+
+---
+
+# 9. Larger Context Does Not Mean Better Reasoning
+
+A larger context window does **not automatically mean** that a model will understand everything perfectly.
+
+Problems can still occur when:
+
+* Too much irrelevant information is included
+* Important information is buried in a large context
+* Documents contain conflicting information
+* The model fails to identify the relevant information
+* The context contains noisy or redundant data
+
+Therefore:
+
+> **More context capacity does not automatically guarantee better reasoning or more accurate answers.**
+
+Good context selection is still important.
+
+---
+
+# 10. Context Window in Long Conversations
+
+As a conversation becomes longer, more tokens may accumulate.
+
+For example:
+
+```text
+Message 1
+   ↓
+Message 2
+   ↓
+Message 3
+   ↓
+Message 4
+   ↓
+Message 5
+   ↓
+...
+```
+
+Eventually, a conversation can approach the model's context limit.
+
+Applications may then use techniques such as:
+
+* Truncating older messages
+* Summarizing conversations
+* Retaining important information separately
+* Using external memory
+* Retrieving relevant history when needed
+
+---
+
+# 11. Context Window and Output
+
+The exact token accounting depends on the model and API, but the total context budget can involve both the information supplied to the model and the space required for generated output.
+
+Conceptually:
+
+```text
+Context Capacity
+┌───────────────────────────────────┐
+│ Input / Prompt                    │
+│ Conversation History              │
+│ Retrieved Context                 │
+│ Tool Results                      │
+│                                   │
+│ Generated Output                  │
+└───────────────────────────────────┘
+```
+
+Therefore, a very large input can leave less room for generated output when the platform uses a combined input/output context limit.
+
+---
+
+# 12. Context Window in an AI Application
+
+A modern AI application may construct the model's context dynamically:
+
+```text
+User Question
+      +
+System Instructions
+      +
+Conversation History
+      +
+RAG Results
+      +
+Tool Results
+      ↓
+   Context
+      ↓
+     LLM
+      ↓
+   Response
+```
+
+This is why context management is an important part of **AI Engineering**.
+
+---
+
+# 13. Context Window vs Memory vs RAG
+
+These three concepts are different.
+
+| Concept            | Purpose                                                                        |
+| ------------------ | ------------------------------------------------------------------------------ |
+| **Context Window** | Defines how much information the model can process at one time                 |
+| **Memory**         | Retains useful information for future interactions                             |
+| **RAG**            | Retrieves relevant external information and places it into the model's context |
+
+A useful mental model is:
+
+```text
+Memory / Knowledge Base
+         ↓
+       RAG
+         ↓
+Relevant Information
+         ↓
+   Context Window
+         ↓
+        LLM
+```
+
+---
+
+# 14. Example: Document Question Answering
+
+Suppose a company has a large collection of documents.
+
+The user asks:
+
+> **"What is the company's leave policy?"**
+
+A RAG system may work like this:
+
+```text
+Company Documents
+       ↓
+Embedding + Vector Database
+       ↓
+Relevant Chunks
+       ↓
+Context Window
+       ↓
+LLM
+       ↓
+Answer
+```
+
+The context window contains the selected information that the model needs to answer the question.
+
+---
+
+# 15. Context Window and AI Engineering
+
+Context management is important because it directly affects:
+
+* **Cost**
+* **Latency**
+* **Response quality**
+* **RAG performance**
+* **Conversation handling**
+* **Prompt design**
+* **Memory architecture**
+* **Document chunking**
+* **Tool usage**
+
+AI Engineers need to decide **what information should be included in the model's context and what information should be left out**.
+
+---
+
+# 16. Context Window — Simple Analogy
+
+Imagine an AI model has a study desk with limited space.
+
+The desk can contain:
+
+```text
+Books
+Notes
+Documents
+Laptop
+Calculator
+```
+
+But the desk has a maximum capacity.
+
+You cannot keep an unlimited amount of material on it at once.
+
+Similarly:
+
+> **The context window is the amount of information the model can have available for processing at one time.**
+
+This is only an analogy; a context window is technically a token-based model input capacity, not human-like memory.
+
+---
+
+# 17. Complete Context Flow
+
+```text
+                  SYSTEM
+               INSTRUCTIONS
+                     +
+               CONVERSATION
+                     +
+                 USER INPUT
+                     +
+                RAG CONTEXT
+                     +
+                TOOL RESULTS
+                     ↓
+              CONTEXT WINDOW
+                     ↓
+                    LLM
+                     ↓
+                 RESPONSE
+```
+
+---
+
+# 18. Key Terms
+
+| Term                     | Meaning                                                                            |
+| ------------------------ | ---------------------------------------------------------------------------------- |
+| **Context Window**       | Maximum amount of tokenized information a model can process as context at one time |
+| **Token**                | A unit of text processed by the model                                              |
+| **Context**              | Information provided to the model for the current task                             |
+| **Context Length**       | Another term commonly used for context capacity                                    |
+| **RAG Context**          | Information retrieved from an external knowledge source                            |
+| **Conversation History** | Previous messages included in the current context                                  |
+| **Context Management**   | Selecting, organizing, compressing, or removing information from the context       |
+
+---
+
+# Final Definition
+
+> **A context window is the maximum amount of tokenized information an AI model can process as context at one time, including prompts, conversation history, retrieved documents, tool results, and other relevant inputs.**
+
+### One-line takeaway
+
+> **Context Window = the amount of information the model can see and use at one time.**
+
+### Remember the difference
+
+```text
+Context Window → What the model can process now
+Memory         → What the system can retain for later
+RAG            → How relevant external information is retrieved
+```
+
+'''
